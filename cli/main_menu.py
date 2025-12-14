@@ -1,8 +1,8 @@
 from utils.storage import add_user, add_recipe, view_recipe
 
-def add(username):
+def add(username, k_user, password):
     """
-    Add's recipe name and information to recipes.json
+    Add's recipe name and information to recipes.json (encrypted and signed)
     """
 
     recipe_name = input("Enter name of recipe: ").lower()
@@ -22,29 +22,29 @@ def add(username):
         "information": recipe_information
     }
 
-    add_recipe(username, recipe_name, recipe_entry)
+    add_recipe(username, recipe_name, recipe_entry, k_user, password)
 
-def view(username):
+def view(username, k_user):
 
     recipe_name = input("Enter the name of the recipe: ").lower()
 
-    view_recipe(username, recipe_name)
+    view_recipe(username, recipe_name, k_user)
     
 
 
-def main_menu(username, k_user):
+def main_menu(username, k_user, password):
     while True:
         print("\n=== Super Secret Recipe Cookbook ===")
         print("""1. Add recipe
 2. View recipe
-3. Exit""")
+3. Log Out""")
 
         s = input("Select an option: ").strip()
 
         if s == "1":
-            add(username)
+            add(username, k_user, password)
         elif s == "2":
-            view(username)
+            view(username, k_user)
         elif s == "3":
             print("Returning to login screen. Goodbye!")
             break
