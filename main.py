@@ -12,8 +12,8 @@ def main():
         if s == "1":
             register()
         elif s == "2":
-            username, k_user = login()
-            main_menu(username, k_user)
+            username, k_user, password = login()
+            main_menu(username, k_user, password)
         elif s == "3":
             print("Exiting program. Goodbye!")
             break

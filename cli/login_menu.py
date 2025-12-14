@@ -1,7 +1,7 @@
 import time
 import os
 from utils.storage import add_user, user_exists, wrong_password, get_user_key
-from utils.encryption import encrypt_password
+from utils.encryption import encrypt_password, generate_rsa_keys, create_self_signed_certificate
 
 user_info = {}
 
@@ -22,9 +22,18 @@ def register():
         if password != password_confirm:
             print("Error: passwords do not match")
         else:
-            print("User registered!!!")
             break
+    
+    # Generate password hash and salts
     salt_b64, password_key, salt2_b64 = encrypt_password(password)
+    
+    # Generate RSA keys and certificate
+    print("Generating RSA keys and certificate...")
+    private_key, public_key = generate_rsa_keys(username, password)
+    cert = create_self_signed_certificate(username, private_key, public_key)
+    
+    print("User registered!!!")
+    
     user_info = {
         "salt": salt_b64,
         "key": password_key,
@@ -50,5 +59,5 @@ def login():
             break
 
     k_user = get_user_key(username, password)
-    return username, k_user
+    return username, k_user, password
         
