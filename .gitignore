@@ -1,26 +1,21 @@
+# Recipe data
+recipes.json
+
+# RSA Keys (sensitive!)
+keys/
+*.pem
+
+# Certificates
+certs/
+
 # Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-
-# Virtual Environment
+*.pyc
+*.pyo
 venv/
-env/
-ENV/
-
-# User Data
-recipes.json
+.venv/
 
 # IDE
 .vscode/
 .idea/
 *.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
